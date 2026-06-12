@@ -7,11 +7,12 @@ def transfer_time(payload_gb, bandwidth_gb_per_sec, latency_ns):
     bandwidth_gb_per_sec: how nany gigabytes the memory can move per second
     latency_ns: delay before transfer starts, measured in nano seconds
 
-  """"
+  """
   latency_seconds = latency_ns / 1_000_000_000
-  tranfer_seconds = payload_gb/bandwidth_gb_per_sec
+  transfer_seconds = payload_gb/bandwidth_gb_per_sec
 
   total_time = latency_seconds + transfer_seconds
+  return total_time
 
 # Example memory specs
 ddr5_bandwidth = 80      # GB/s, approximate high-end DDR5 system memory
