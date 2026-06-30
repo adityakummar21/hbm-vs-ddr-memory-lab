@@ -4,7 +4,7 @@
 def transfer_time(payload_gb, bandwidth_gb_per_sec, latency_ns):
   """
     payload_gb: amount of data being moved in gigabyte
-    bandwidth_gb_per_sec: how nany gigabytes the memory can move per second
+    bandwidth_gb_per_sec: how many gigabytes the memory can move per second
     latency_ns: delay before transfer starts, measured in nano seconds
 
   """
@@ -21,21 +21,17 @@ hbm3e_bandwidth = 1200   # GB/s, approximate HBM3E stack bandwidth
 ddr5_latency = 80        # ns, rough example latency
 hbm3e_latency = 20       # ns, rough example latency
 
-payload_size = 10        # GB
+payload_sizes = [0.001, 0.1, 1, 10, 100]
 
 
-ddr5_time = transfer_time(payload_size, ddr5_bandwidth, ddr5_latency)
-hbm3e_time = transfer_time(payload_size, hbm3e_bandwidth, hbm3e_latency)
+print("Memory Wall Simulator Version 0.2")
+print("----------------------------------")
 
+for payload in payload_sizes:
+  ddr5_time = transfer_time(payload, ddr5_bandwidth, ddr5_latency)
+  hbm3e_time = transfer_time(payload, hbm3e_bandwidth, hbm3e_latency)
 
-print("Memory Wall Simulator v0.1")
-print("--------------------------")
-print(f"Payload size: {payload_size} GB")
-print()
-print(f"DDR5 transfer time:  {ddr5_time:.6f} seconds")
-print(f"HBM3E transfer time: {hbm3e_time:.6f} seconds")
-print()
-print(f"HBM3E is approximately {ddr5_time / hbm3e_time:.1f}x faster for this transfer.")
+  print(payload, ddr5_time, hbm3e_time)
 
 
 
